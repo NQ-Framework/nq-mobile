@@ -1,0 +1,7 @@
+{
+  "name": "nq-mobile",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
