@@ -8,8 +8,16 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
+    "test:ci": "ng test --watch=false --browsers=ChromeHeadless",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run test:ci && npm run lint",
+    "preversion": "npm run lint && npm run test:ci",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
+
   },
   "private": true,
   "resolutions": {
