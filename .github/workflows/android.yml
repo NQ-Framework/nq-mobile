@@ -57,6 +57,6 @@ jobs:
       - name: Distribute APK to Firebase
         uses: w9jds/firebase-action@master
         with:
-          args: appdistribution:distribute android/app/build/outputs/apk/debug/app-debug.apk --app 1:384505471856:android:186e38a96cb6d6c2ae65b5 --groups "Core Testers" --release-notes-file "changelog.txt"
+          args: appdistribution:distribute android/app/build/outputs/apk/debug/app-debug.apk --app 1:384505471856:android:186e38a96cb6d6c2ae65b5 --groups "core-testers" --release-notes-file "changelog.txt"
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
