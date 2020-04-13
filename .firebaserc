@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "nq-framework"
+  },
+  "targets": {
+    "nq-framework": {
+      "hosting": {
+        "nqmobile": [
+          "nqmobile"
+        ]
+      }
+    }
+  }
+}
