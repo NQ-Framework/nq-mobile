@@ -8,6 +8,7 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
+    "build:android": "cross-env ANDROID_APP_VERSION_NAME=$(git describe) ANDROID_APP_VERSION_CODE=$(git rev-list --count HEAD) ./android/gradlew build -b ./android/build.gradle",
     "test:ci": "ng test --watch=false --browsers=ChromeHeadless",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "lint": "ng lint",
