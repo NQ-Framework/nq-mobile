@@ -9,18 +9,19 @@
     *ngIf="!navigatingAway && (user$ | async) as user; else loading"
   >
     <div *ngIf="isValidUser(user); else signedOut">
-      <p>Ulogovani ste kao: {{getUserName(user)}}</p>
-      <ion-button (click)="signOut()">Izloguj se</ion-button>
-      <a routerLink="/field-service">Idi na početnu stranicu</a>
+      <p i18n>Logged in as: {{$any(user).displayName}}</p>
+      <ion-button i18n (click)="signOut()">Log out</ion-button>
+      <a i18n routerLink="/field-service">Go to home page</a>
     </div>
     <ng-template #signedOut>
       <form [formGroup]="loginForm">
         <ion-item>
-          <ion-label position="stacked">Email</ion-label>
+          <ion-label i18n position="stacked">Email</ion-label>
           <ion-input
             formControlName="email"
             type="email"
-            placeholder="E-mail adresa"
+            i18n-placeholder
+            placeholder="E-mail address"
             [class.invalid]="!loginForm.controls['email'].valid &&
       loginForm.controls['email'].touched"
           ></ion-input>
@@ -30,15 +31,16 @@
           *ngIf="!loginForm.controls['email'].valid &&
        loginForm.controls['email'].touched"
         >
-          <ion-label>Unesite e-mail adresu.</ion-label>
+          <ion-label i18n>Input your email address</ion-label>
         </ion-item>
 
         <ion-item>
-          <ion-label position="stacked">Lozinka</ion-label>
+          <ion-label i18n position="stacked">Password</ion-label>
           <ion-input
             formControlName="password"
             type="password"
-            placeholder="Lozinka"
+            i18n-placeholder
+            placeholder="Password"
             [class.invalid]="!loginForm.controls['password'].valid&& loginForm.controls['password'].touched"
           ></ion-input>
         </ion-item>
@@ -47,15 +49,17 @@
           *ngIf="!loginForm.controls['password'].valid
       && loginForm.controls['password'].touched"
         >
-          <ion-label>Lozinka ne može biti kraća od 6 karaktera.</ion-label>
+          <ion-label i18n>
+            Your password has to be at least 6 characters long
+          </ion-label>
         </ion-item>
 
         <ion-button
           (click)="loginUser(loginForm)"
           expand="block"
+          i18n
           [disabled]="!loginForm.valid"
-        >
-          Uloguj se
+          >Log in
         </ion-button>
 
         <ion-item *ngIf="error">
@@ -64,7 +68,6 @@
       </form>
     </ng-template>
   </ng-container>
-  <ng-template #loading>
-    Učitavanje u toku...
-  </ng-template>
+  <ng-template i18n #loading>Loading...</ng-template>
+  <app-language-picker></app-language-picker>
 </ion-content>

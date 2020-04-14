@@ -1,0 +1,17 @@
+{
+  "locale": "en",
+  "translations": {
+    "4599108100699445337": "Choose app language:",
+    "279305208766735633": "Logged in as: {$INTERPOLATION}",
+    "7507948636555938109": "Log out",
+    "4020663284410482277": "Go to home page",
+    "4768749765465246664": "Email",
+    "5830520205989474611": "E-mail address",
+    "1431416938026210429": "Password",
+    "3136060218695297500": "Log in ",
+    "2232497843927192823": "Input your email address",
+    "1274111687983221047": " Your password has to be at least 6 characters long ",
+    "3894950702316166331": "Loading...",
+    "8978794598658254044": "Error logging in. Please try again"
+  }
+}

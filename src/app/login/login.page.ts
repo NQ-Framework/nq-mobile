@@ -60,7 +60,7 @@ export class LoginPage implements OnInit {
         });
       })
       .catch((e) => {
-        this.error = 'Logovanje nije uspešno. Pokušajte ponovo';
+        this.error = $localize`Error logging in. Please try again`;
         console.error(e);
       })
       .finally(async () => {
@@ -74,8 +74,5 @@ export class LoginPage implements OnInit {
 
   isValidUser(user: firebase.User | 'none'): boolean {
     return user && user !== 'none';
-  }
-  getUserName(user: firebase.User) {
-    return user.displayName;
   }
 }

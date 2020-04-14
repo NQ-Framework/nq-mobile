@@ -1,0 +1,8 @@
+<ion-list>
+  <span i18n>Choose app language:</span>
+  <ion-item *ngFor="let language of supportedLanguages">
+    <a href (click)="changeLanguage(language.code)">
+      {{ language.name }}
+    </a>
+  </ion-item>
+</ion-list>

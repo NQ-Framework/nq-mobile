@@ -1,0 +1,17 @@
+{
+  "locale": "rs",
+  "translations": {
+    "279305208766735633": "Ulogovani korisnik: {$INTERPOLATION}",
+    "7507948636555938109": "Izloguj se",
+    "4020663284410482277": "Navigacija na početnu stranicu",
+    "4768749765465246664": "Email",
+    "1431416938026210429": "Lozinka",
+    "3136060218695297500": "Uloguj se",
+    "2232497843927192823": "Unesite Email adresu",
+    "1274111687983221047": "Lozinka mora sadržati barem 6 karaktera",
+    "3894950702316166331": "Učitavanje...",
+    "8978794598658254044": "Logovanje nije uspešno. Pokušajte ponovo",
+    "4599108100699445337": "Odaberite jezik aplikacije:",
+    "5830520205989474611": "E-mail adresa"
+  }
+}

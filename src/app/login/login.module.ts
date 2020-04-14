@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { LoginPageRoutingModule } from './login-routing.module';
 
 import { LoginPage } from './login.page';
+import { LanguagePickerComponent } from '../language-picker/language-picker.component';
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import { LoginPage } from './login.page';
     ReactiveFormsModule,
     LoginPageRoutingModule,
   ],
-  declarations: [LoginPage],
+  declarations: [LoginPage, LanguagePickerComponent],
 })
 export class LoginPageModule {}
