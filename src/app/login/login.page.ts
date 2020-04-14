@@ -22,7 +22,7 @@ export class LoginPage implements OnInit {
     private formBuilder: FormBuilder,
     private loading: LoadingController,
   ) {
-    this.user$ = this.auth.authState.pipe(map((u) => (u ? u : 'none')));
+    this.user$ = this.auth.authState.pipe(map(u => (u ? u : 'none')));
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: [
@@ -53,13 +53,13 @@ export class LoginPage implements OnInit {
         loginForm.value.email,
         loginForm.value.password,
       )
-      .then((u) => {
+      .then(u => {
         this.navigatingAway = true;
         this.router.navigate(['']).then(() => {
           this.navigatingAway = false;
         });
       })
-      .catch((e) => {
+      .catch(e => {
         this.error = $localize`Error logging in. Please try again`;
         console.error(e);
       })

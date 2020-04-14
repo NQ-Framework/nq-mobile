@@ -9,8 +9,8 @@ describe('LanguagePickerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LanguagePickerComponent ],
-      imports: [IonicModule.forRoot()]
+      declarations: [LanguagePickerComponent],
+      imports: [IonicModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(LanguagePickerComponent);
