@@ -27,7 +27,7 @@ translationDataPromise.then((data: ParsedTranslationBundle) => {
   }
   platformBrowserDynamic()
     .bootstrapModule(AppModule)
-    .then(ref => {
+    .then((ref) => {
       // tslint:disable-next-line: no-string-literal
       if (window['ngRef']) {
         // tslint:disable-next-line: no-string-literal
@@ -38,5 +38,5 @@ translationDataPromise.then((data: ParsedTranslationBundle) => {
 
       // Otherwise, log the boot error
     })
-    .catch(err => console.error(err));
+    .catch((err) => console.error(err));
 });

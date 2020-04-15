@@ -11,5 +11,6 @@ export const environment: IEnvironment = {
     appId: '1:384505471856:web:99ed5998749095e9ae65b5',
     measurementId: 'G-0F7G0T4DSK',
   },
+  apiUrl: 'https://nq-server.azurewebsites.net/v1',
   production: true,
 };
