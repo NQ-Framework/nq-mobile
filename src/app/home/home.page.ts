@@ -11,10 +11,10 @@ export class HomePage {
   constructor(private client: HttpClient, private config: ConfigService) {}
   testApi() {
     this.client.get(this.config.apiUrl + '/profile').subscribe({
-      next: (res) => {
+      next: res => {
         console.log('stigao ', res);
       },
-      error: (er) => {
+      error: er => {
         console.log('err', er);
       },
     });

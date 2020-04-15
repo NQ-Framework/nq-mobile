@@ -22,7 +22,7 @@ export class InterceptorService implements HttpInterceptor {
     }
     return this.auth.authState.pipe(
       first(),
-      mergeMap((user) => {
+      mergeMap(user => {
         if (!user) {
           throw new Error(
             'Cannot authenticate to API without a signed in user!',
@@ -30,7 +30,7 @@ export class InterceptorService implements HttpInterceptor {
         }
         return user.getIdToken();
       }),
-      mergeMap((token) => {
+      mergeMap(token => {
         return next.handle(
           req.clone({
             setHeaders: {
