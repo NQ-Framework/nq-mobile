@@ -15,6 +15,15 @@ export class LanguagePickerComponent implements OnInit {
   ngOnInit() {}
   changeLanguage(language: string) {
     localStorage.setItem('language_code', language);
+    this.reloadWindow();
+  }
+
+  languageActive(language: string) {
+    const storageLanguage = localStorage.getItem('language_code') || 'rs';
+    return storageLanguage === language;
+  }
+
+  reloadWindow() {
     location.reload();
   }
 }
