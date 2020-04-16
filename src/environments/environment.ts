@@ -16,6 +16,7 @@ export const environment: IEnvironment = {
     measurementId: 'G-0F7G0T4DSK',
   },
   apiUrl: 'http://localhost:3000/v1',
+  // apiUrl: 'https://server.nqframework.com/v1',
   production: false,
 };
 
