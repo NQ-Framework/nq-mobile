@@ -1,6 +1,13 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { ConfigService } from '../config.service';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable, BehaviorSubject, from } from 'rxjs';
+import { flatMap, filter, map, tap } from 'rxjs/operators';
+
+interface Item {
+  name: string;
+  id: number;
+  returnValue: string;
+}
 
 @Component({
   selector: 'app-home',
@@ -8,15 +15,40 @@ import { ConfigService } from '../config.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  constructor(private client: HttpClient, private config: ConfigService) {}
+  data$: BehaviorSubject<object> = new BehaviorSubject({});
+  status$: BehaviorSubject<string> = new BehaviorSubject('not requested');
+  constructor(private firestore: AngularFirestore) {}
   testApi() {
-    this.client.get(this.config.apiUrl + '/profile').subscribe({
-      next: res => {
-        console.log('stigao ', res);
-      },
-      error: er => {
-        console.log('err', er);
-      },
-    });
+    const id = Math.random() * 20;
+    from(
+      this.firestore.collection<Item>('items').add({
+        name: 'novi item',
+        id,
+        returnValue: null,
+      }),
+    )
+      .pipe(
+        tap(() => {
+          this.status$.next('created document');
+        }),
+        flatMap(() =>
+          this.firestore
+            .collection<Item>('items', (ref) => ref.where('id', '==', id))
+            .stateChanges(['modified']),
+        ),
+        map((evs) =>
+          evs.find((docEvent) => docEvent.payload.doc.data().returnValue),
+        ),
+        filter((returnValue) => !!returnValue),
+        tap((finalValue) => {
+          this.status$.next('got response');
+          this.data$.next(finalValue.payload.doc.data());
+        }),
+      )
+      .subscribe();
+  }
+
+  stringify(object: any) {
+    return JSON.stringify(object);
   }
 }

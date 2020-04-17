@@ -24,6 +24,12 @@
         >UI Components</a
       >
     </p>
-    <ion-button (click)="testApi()">call ze api</ion-button>
+    <ion-button (click)="testApi()">Request some data</ion-button>
+    <p>Status je: {{status$ | async}}</p>
+    <p>Data je: {{stringify(data$ | async)}}</p>
+    <ion-spinner *ngIf="(status$ | async) == 'created document'"></ion-spinner>
+    <p *ngIf="(status$ | async) == 'created document'">
+      Idi u nq connector da mu daš response data :)
+    </p>
   </div>
 </ion-content>
