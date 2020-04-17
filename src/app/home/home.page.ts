@@ -33,14 +33,14 @@ export class HomePage {
         }),
         flatMap(() =>
           this.firestore
-            .collection<Item>('items', (ref) => ref.where('id', '==', id))
+            .collection<Item>('items', ref => ref.where('id', '==', id))
             .stateChanges(['modified']),
         ),
-        map((evs) =>
-          evs.find((docEvent) => docEvent.payload.doc.data().returnValue),
+        map(evs =>
+          evs.find(docEvent => docEvent.payload.doc.data().returnValue),
         ),
-        filter((returnValue) => !!returnValue),
-        tap((finalValue) => {
+        filter(returnValue => !!returnValue),
+        tap(finalValue => {
           this.status$.next('got response');
           this.data$.next(finalValue.payload.doc.data());
         }),
