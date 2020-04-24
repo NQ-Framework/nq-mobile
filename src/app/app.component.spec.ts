@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
+import { PushNotificationsService } from './push-notifications.service';
 
 describe('AppComponent', () => {
   let statusBarSpy, splashScreenSpy, platformReadySpy, platformSpy;
@@ -23,6 +24,12 @@ describe('AppComponent', () => {
         { provide: StatusBar, useValue: statusBarSpy },
         { provide: SplashScreen, useValue: splashScreenSpy },
         { provide: Platform, useValue: platformSpy },
+        {
+          provide: PushNotificationsService,
+          useValue: jasmine.createSpyObj('PushNotificationsService', {
+            initialize: jasmine.createSpy(),
+          }),
+        },
       ],
     }).compileComponents();
   }));
@@ -39,6 +46,14 @@ describe('AppComponent', () => {
     await platformReadySpy;
     expect(statusBarSpy.styleDefault).toHaveBeenCalled();
     expect(splashScreenSpy.hide).toHaveBeenCalled();
+  });
+
+  it('should initialize notifications', async () => {
+    TestBed.createComponent(AppComponent);
+    const service = TestBed.inject(PushNotificationsService);
+    expect(platformSpy.ready).toHaveBeenCalled();
+    await platformReadySpy;
+    expect(service.initialize).toHaveBeenCalledTimes(1);
   });
 
   // TODO: add more tests!

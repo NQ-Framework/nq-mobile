@@ -13,6 +13,9 @@ import { AngularFireAuthModule } from '@angular/fire/auth/';
 import { environment } from '../environments/environment';
 import { InterceptorService } from './interceptor.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { FCM } from 'capacitor-fcm';
+import { PushNotificationsPlugin, Plugins } from '@capacitor/core';
+import { PushNotificationsService } from './push-notifications.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,6 +31,8 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
   providers: [
     StatusBar,
     SplashScreen,
+    FCM,
+    { provide: 'PushNotificationsPlugin', useValue: Plugins.PushNotifications },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
   ],

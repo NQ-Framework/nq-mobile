@@ -21,8 +21,9 @@ export class LoginPage implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private loading: LoadingController,
-  ) {
-    this.user$ = this.auth.authState.pipe(map(u => (u ? u : 'none')));
+  ) {}
+  ngOnInit() {
+    this.user$ = this.auth.authState.pipe(map((u) => (u ? u : 'none')));
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: [
@@ -34,31 +35,37 @@ export class LoginPage implements OnInit {
       this.error = '';
     });
   }
-  ngOnInit() {}
+
+  async defaultTestUser(): Promise<void> {
+    await this.loginWithEmailAndPassword('milos.s.pfc@gmail.com', 'Test1234!!');
+  }
 
   async loginUser(loginForm: FormGroup): Promise<void> {
     if (!loginForm.valid) {
       return;
     }
-    this.error = '';
+    const email = loginForm.value.email;
+    const password = loginForm.value.password;
 
+    await this.loginWithEmailAndPassword(email, password);
+  }
+
+  private async loginWithEmailAndPassword(email: string, password: string) {
+    this.error = '';
     const loading = await this.loading.create({
       message: 'Logovanje u toku',
       showBackdrop: true,
     });
     await loading.present();
     this.auth
-      .signInWithEmailAndPassword(
-        loginForm.value.email,
-        loginForm.value.password,
-      )
+      .signInWithEmailAndPassword(email, password)
       .then(() => {
         this.navigatingAway = true;
         this.router.navigate(['']).then(() => {
           this.navigatingAway = false;
         });
       })
-      .catch(e => {
+      .catch((e) => {
         this.error = $localize`Error logging in. Please try again`;
         console.error(e);
       })

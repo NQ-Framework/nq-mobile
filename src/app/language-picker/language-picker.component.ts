@@ -24,6 +24,7 @@ export class LanguagePickerComponent implements OnInit {
   }
 
   reloadWindow() {
+    // istanbul ignore next
     location.reload();
   }
 }

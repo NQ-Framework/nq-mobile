@@ -62,6 +62,10 @@
           >Log in
         </ion-button>
 
+        <ion-button (click)="defaultTestUser()" expand="block"
+          >default test user
+        </ion-button>
+
         <ion-item *ngIf="error">
           {{error}}
         </ion-item>

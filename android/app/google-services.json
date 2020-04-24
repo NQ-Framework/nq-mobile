@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "384505471856",
+    "firebase_url": "https://nq-framework.firebaseio.com",
+    "project_id": "nq-framework",
+    "storage_bucket": "nq-framework.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:384505471856:android:186e38a96cb6d6c2ae65b5",
+        "android_client_info": {
+          "package_name": "com.nqframework.app.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "384505471856-4smh4d9mqjgsna0iqe1n79eisj4el5dj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmVrfHDp2GuJV_dyfJaumAwrLiFRceT_I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "384505471856-4smh4d9mqjgsna0iqe1n79eisj4el5dj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

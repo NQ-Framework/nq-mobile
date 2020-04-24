@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable, BehaviorSubject, from } from 'rxjs';
+import { BehaviorSubject, from } from 'rxjs';
 import { flatMap, filter, map, tap } from 'rxjs/operators';
 
 interface Item {
@@ -18,6 +18,7 @@ export class HomePage {
   data$: BehaviorSubject<object> = new BehaviorSubject({});
   status$: BehaviorSubject<string> = new BehaviorSubject('not requested');
   constructor(private firestore: AngularFirestore) {}
+
   testApi() {
     const id = Math.random() * 20;
     from(
@@ -33,14 +34,14 @@ export class HomePage {
         }),
         flatMap(() =>
           this.firestore
-            .collection<Item>('items', ref => ref.where('id', '==', id))
+            .collection<Item>('items', (ref) => ref.where('id', '==', id))
             .stateChanges(['modified']),
         ),
-        map(evs =>
-          evs.find(docEvent => docEvent.payload.doc.data().returnValue),
+        map((evs) =>
+          evs.find((docEvent) => docEvent.payload.doc.data().returnValue),
         ),
-        filter(returnValue => !!returnValue),
-        tap(finalValue => {
+        filter((returnValue) => !!returnValue),
+        tap((finalValue) => {
           this.status$.next('got response');
           this.data$.next(finalValue.payload.doc.data());
         }),
