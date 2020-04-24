@@ -35,7 +35,7 @@ export class PushNotificationsService {
     if (Capacitor.platform === 'web') {
       return;
     }
-    this.auth.authState.subscribe((user) => {
+    this.auth.authState.subscribe(user => {
       if (!user) {
         if (listenerAction) {
           listenerAction.remove();
@@ -56,8 +56,8 @@ export class PushNotificationsService {
             .then(() => {
               console.log('subscribed to topic test');
             })
-            .catch((err) => console.error('error subscribing ', err));
-          this.fcm.getToken().then((t) => {
+            .catch(err => console.error('error subscribing ', err));
+          this.fcm.getToken().then(t => {
             const writtenToken = localStorage.getItem('written_fcm_token');
             if (!writtenToken || writtenToken !== t.token) {
               this.firestore
@@ -67,7 +67,7 @@ export class PushNotificationsService {
                 .then(() => {
                   localStorage.setItem('written_fcm_token', t.token);
                 })
-                .catch((err) => console.error('oh noes ', err));
+                .catch(err => console.error('oh noes ', err));
             }
           });
           listenerNotification = this.pushNotifications.addListener(
@@ -84,7 +84,7 @@ export class PushNotificationsService {
             },
           );
         })
-        .catch((err) => alert(JSON.stringify(err)));
+        .catch(err => alert(JSON.stringify(err)));
     });
   }
 }
