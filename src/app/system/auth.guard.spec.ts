@@ -4,7 +4,7 @@ import { AuthGuard } from './auth.guard';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { of } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from '../app-routing.module';
 import { APP_BASE_HREF } from '@angular/common';
 
 const mockAuth = {
@@ -37,7 +37,7 @@ describe('AuthGuard', () => {
       return guard
         .canActivate()
         .pipe(
-          tap(v => {
+          tap((v) => {
             expect(v.toString()).toEqual('/login');
           }),
         )
@@ -51,7 +51,7 @@ describe('AuthGuard', () => {
       return guard
         .canActivate()
         .pipe(
-          tap(v => {
+          tap((v) => {
             expect(v).toEqual(true);
           }),
         )

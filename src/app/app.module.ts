@@ -32,6 +32,7 @@ import { Plugins } from '@capacitor/core';
     SplashScreen,
     FCM,
     { provide: 'PushNotificationsPlugin', useValue: Plugins.PushNotifications },
+    { provide: 'DevicePlugin', useValue: Plugins.Device },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
   ],
