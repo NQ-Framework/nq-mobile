@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../environments/environment';
-import { IEnvironment } from '../environments/environment.interface';
+import { environment } from '../../environments/environment';
+import { IEnvironment } from '../../environments/environment.interface';
 import { FirebaseOptions } from '@angular/fire';
 
 @Injectable({

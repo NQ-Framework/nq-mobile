@@ -11,11 +11,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth/';
 import { environment } from '../environments/environment';
-import { InterceptorService } from './interceptor.service';
+import { InterceptorService } from './system/interceptor.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FCM } from 'capacitor-fcm';
-import { PushNotificationsPlugin, Plugins } from '@capacitor/core';
-import { PushNotificationsService } from './push-notifications.service';
+import { Plugins } from '@capacitor/core';
 
 @NgModule({
   declarations: [AppComponent],
