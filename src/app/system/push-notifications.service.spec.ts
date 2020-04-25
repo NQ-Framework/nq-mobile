@@ -4,7 +4,7 @@ import { PushNotificationsService } from './push-notifications.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { Capacitor } from '@capacitor/core';
+import { Capacitor, PushNotificationsPlugin } from '@capacitor/core';
 import { BehaviorSubject } from 'rxjs';
 import { FCM } from 'capacitor-fcm';
 
@@ -40,7 +40,7 @@ describe('PushNotificationsService', () => {
             register: jasmine
               .createSpy()
               .and.returnValue(Promise.resolve(true)),
-            addListener: event => {
+            addListener: (event) => {
               if (event === 'pushNotificationReceived') {
                 return { remove: spyAlert };
               }
@@ -68,8 +68,9 @@ describe('PushNotificationsService', () => {
     const service: PushNotificationsService = TestBed.inject(
       PushNotificationsService,
     );
-    // tslint:disable-next-line: deprecation
-    const pushNotifications = TestBed.get('PushNotificationsPlugin');
+    const pushNotifications = TestBed.inject<PushNotificationsPlugin>(
+      'PushNotificationsPlugin' as any,
+    );
 
     service.initialize();
     expect(pushNotifications.register).toHaveBeenCalledTimes(0);

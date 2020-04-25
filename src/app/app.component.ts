@@ -4,6 +4,7 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { PushNotificationsService } from './system/push-notifications.service';
+import { DeviceManagementService } from './system/device-management.service';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,7 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private pushNotifications: PushNotificationsService,
+    private deviceManagement: DeviceManagementService,
   ) {
     this.initializeApp();
   }
@@ -25,11 +27,15 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
 
+      this.initializeRegistration();
       this.initializeNotifications();
     });
   }
 
   initializeNotifications() {
     this.pushNotifications.initialize();
+  }
+  initializeRegistration() {
+    this.deviceManagement.updateRegistrationOnSignIn();
   }
 }

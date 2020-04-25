@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoadingController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { DeviceManagementService } from '../system/device-management.service';
 
 @Component({
   selector: 'app-login',
@@ -21,9 +22,10 @@ export class LoginPage implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private loading: LoadingController,
+    private device: DeviceManagementService,
   ) {}
   ngOnInit() {
-    this.user$ = this.auth.authState.pipe(map(u => (u ? u : 'none')));
+    this.user$ = this.auth.authState.pipe(map((u) => (u ? u : 'none')));
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: [
@@ -65,7 +67,7 @@ export class LoginPage implements OnInit {
           this.navigatingAway = false;
         });
       })
-      .catch(e => {
+      .catch((e) => {
         this.error = $localize`Error logging in. Please try again`;
         console.error(e);
       })
@@ -75,7 +77,9 @@ export class LoginPage implements OnInit {
   }
 
   signOut() {
-    this.auth.signOut();
+    this.device.unregister().finally(() => {
+      this.auth.signOut();
+    });
   }
 
   isValidUser(user: firebase.User | 'none'): boolean {

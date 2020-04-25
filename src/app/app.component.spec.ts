@@ -6,7 +6,8 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
-import { PushNotificationsService } from './push-notifications.service';
+import { PushNotificationsService } from './system/push-notifications.service';
+import { DeviceManagementService } from './system/device-management.service';
 
 describe('AppComponent', () => {
   let statusBarSpy, splashScreenSpy, platformReadySpy, platformSpy;
@@ -28,6 +29,12 @@ describe('AppComponent', () => {
           provide: PushNotificationsService,
           useValue: jasmine.createSpyObj('PushNotificationsService', {
             initialize: jasmine.createSpy(),
+          }),
+        },
+        {
+          provide: DeviceManagementService,
+          useValue: jasmine.createSpyObj('DeviceManagementService', {
+            updateRegistrationOnSignIn: jasmine.createSpy(),
           }),
         },
       ],
