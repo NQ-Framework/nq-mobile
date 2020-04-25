@@ -35,56 +35,81 @@ export class PushNotificationsService {
     if (Capacitor.platform === 'web') {
       return;
     }
-    this.auth.authState.subscribe(user => {
+    this.auth.authState.subscribe((user) => {
       if (!user) {
-        if (listenerAction) {
-          listenerAction.remove();
-        }
-        if (listenerNotification) {
-          listenerNotification.remove();
-        }
-        this.fcm.deleteInstance();
-        localStorage.removeItem('written_fcm_token');
+        this.unregisterAndCleanup();
         return;
       }
 
-      this.pushNotifications
-        .register()
-        .then(() => {
-          this.fcm
-            .subscribeTo({ topic: 'test' })
-            .then(() => {
-              console.log('subscribed to topic test');
-            })
-            .catch(err => console.error('error subscribing ', err));
-          this.fcm.getToken().then(t => {
-            const writtenToken = localStorage.getItem('written_fcm_token');
-            if (!writtenToken || writtenToken !== t.token) {
-              this.firestore
-                .collection<FSUser>('users')
-                .doc(user.uid)
-                .set({ fcmToken: t.token }, { merge: true })
-                .then(() => {
-                  localStorage.setItem('written_fcm_token', t.token);
-                })
-                .catch(err => console.error('oh noes ', err));
-            }
-          });
-          listenerNotification = this.pushNotifications.addListener(
-            'pushNotificationReceived',
-            (notification: PushNotification) => {
-              alert('Push received: ' + JSON.stringify(notification));
-            },
-          );
-
-          listenerAction = this.pushNotifications.addListener(
-            'pushNotificationActionPerformed',
-            (notification: PushNotificationActionPerformed) => {
-              alert('Push action performed: ' + JSON.stringify(notification));
-            },
-          );
-        })
-        .catch(err => alert(JSON.stringify(err)));
+      this.registerForPushNotifications(user);
     });
+  }
+
+  private registerForPushNotifications(user) {
+    this.pushNotifications
+      .register()
+      .then(() => {
+        this.registerForTestTopic();
+
+        this.handleFCMToken(user);
+
+        this.subscribeToNotificationEvents();
+      })
+      .catch((err) => alert(JSON.stringify(err)));
+  }
+
+  private subscribeToNotificationEvents() {
+    listenerNotification = this.pushNotifications.addListener(
+      'pushNotificationReceived',
+      (notification: PushNotification) => {
+        alert('Push received: ' + JSON.stringify(notification));
+      },
+    );
+    listenerAction = this.pushNotifications.addListener(
+      'pushNotificationActionPerformed',
+      (notification: PushNotificationActionPerformed) => {
+        alert('Push action performed: ' + JSON.stringify(notification));
+      },
+    );
+  }
+
+  private handleFCMToken(user: any) {
+    this.fcm.getToken().then((payload) => {
+      const writtenToken = localStorage.getItem('written_fcm_token');
+      if (!writtenToken || writtenToken !== payload.token) {
+        this.saveTokenToFirestore(user, payload.token);
+        localStorage.setItem('written_fcm_token', payload.token);
+      }
+    });
+  }
+
+  private saveTokenToFirestore(user: any, token: string) {
+    this.firestore
+      .collection<FSUser>('users')
+      .doc(user.uid)
+      .set({ fcmToken: token }, { merge: true })
+      .catch((err) =>
+        console.error('Error uploading FCM token to store ', err),
+      );
+  }
+
+  private registerForTestTopic() {
+    this.fcm
+      .subscribeTo({ topic: 'test' })
+      .then(() => {
+        console.log('subscribed to topic test');
+      })
+      .catch((err) => console.error('error subscribing ', err));
+  }
+
+  private unregisterAndCleanup() {
+    if (listenerAction) {
+      listenerAction.remove();
+    }
+    if (listenerNotification) {
+      listenerNotification.remove();
+    }
+    this.fcm.deleteInstance();
+    localStorage.removeItem('written_fcm_token');
   }
 }
