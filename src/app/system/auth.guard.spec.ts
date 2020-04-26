@@ -37,7 +37,7 @@ describe('AuthGuard', () => {
       return guard
         .canActivate()
         .pipe(
-          tap((v) => {
+          tap(v => {
             expect(v.toString()).toEqual('/login');
           }),
         )
@@ -51,7 +51,7 @@ describe('AuthGuard', () => {
       return guard
         .canActivate()
         .pipe(
-          tap((v) => {
+          tap(v => {
             expect(v).toEqual(true);
           }),
         )

@@ -35,7 +35,7 @@ export class PushNotificationsService {
     if (Capacitor.platform === 'web') {
       return;
     }
-    this.auth.authState.subscribe((user) => {
+    this.auth.authState.subscribe(user => {
       if (!user) {
         this.unregisterAndCleanup();
         return;
@@ -55,7 +55,7 @@ export class PushNotificationsService {
 
         this.subscribeToNotificationEvents();
       })
-      .catch((err) => alert(JSON.stringify(err)));
+      .catch(err => alert(JSON.stringify(err)));
   }
 
   private subscribeToNotificationEvents() {
@@ -74,7 +74,7 @@ export class PushNotificationsService {
   }
 
   private handleFCMToken(user: any) {
-    this.fcm.getToken().then((payload) => {
+    this.fcm.getToken().then(payload => {
       const writtenToken = localStorage.getItem('written_fcm_token');
       if (!writtenToken || writtenToken !== payload.token) {
         this.saveTokenToFirestore(user, payload.token);
@@ -88,9 +88,7 @@ export class PushNotificationsService {
       .collection<FSUser>('users')
       .doc(user.uid)
       .set({ fcmToken: token }, { merge: true })
-      .catch((err) =>
-        console.error('Error uploading FCM token to store ', err),
-      );
+      .catch(err => console.error('Error uploading FCM token to store ', err));
   }
 
   private registerForTestTopic() {
@@ -99,7 +97,7 @@ export class PushNotificationsService {
       .then(() => {
         console.log('subscribed to topic test');
       })
-      .catch((err) => console.error('error subscribing ', err));
+      .catch(err => console.error('error subscribing ', err));
   }
 
   private unregisterAndCleanup() {

@@ -25,7 +25,7 @@ export class LoginPage implements OnInit {
     private device: DeviceManagementService,
   ) {}
   ngOnInit() {
-    this.user$ = this.auth.authState.pipe(map((u) => (u ? u : 'none')));
+    this.user$ = this.auth.authState.pipe(map(u => (u ? u : 'none')));
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: [
@@ -67,7 +67,7 @@ export class LoginPage implements OnInit {
           this.navigatingAway = false;
         });
       })
-      .catch((e) => {
+      .catch(e => {
         this.error = $localize`Error logging in. Please try again`;
         console.error(e);
       })

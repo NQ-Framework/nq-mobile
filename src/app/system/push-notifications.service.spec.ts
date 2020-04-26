@@ -40,7 +40,7 @@ describe('PushNotificationsService', () => {
             register: jasmine
               .createSpy()
               .and.returnValue(Promise.resolve(true)),
-            addListener: (event) => {
+            addListener: event => {
               if (event === 'pushNotificationReceived') {
                 return { remove: spyAlert };
               }
