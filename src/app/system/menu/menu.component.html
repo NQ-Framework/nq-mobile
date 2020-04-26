@@ -1,4 +1,4 @@
-<ion-menu side="start" content-id="main" type="reveal">
+<ion-menu side="start" content-id="main" type="overlay">
   <ion-header>
     <ion-toolbar translucent>
       <ion-title i18n="@@Menu">Menu</ion-title>
@@ -6,13 +6,11 @@
   </ion-header>
   <ion-content>
     <ion-list>
-      <ion-item
+      <app-menu-item
         *ngFor="let menuItem of menu$ | async"
-        [routerLink]="menuItem.url"
+        [menuItem]="menuItem"
       >
-        <ion-icon [name]="menuItem.icon" slot="start"></ion-icon>
-        <ion-label>{{ getText(menuItem) }}</ion-label>
-      </ion-item>
+      </app-menu-item>
     </ion-list>
   </ion-content>
 </ion-menu>

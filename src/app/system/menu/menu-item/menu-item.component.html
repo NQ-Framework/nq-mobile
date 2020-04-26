@@ -1,0 +1,4 @@
+<ion-item [routerLink]="menuItem.url" (click)="hideMenu()">
+  <ion-icon [name]="menuItem.icon" slot="start"></ion-icon>
+  <ion-label>{{ getText(menuItem) }}</ion-label>
+</ion-item>

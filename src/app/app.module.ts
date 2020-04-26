@@ -16,9 +16,10 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FCM } from 'capacitor-fcm';
 import { Plugins } from '@capacitor/core';
 import { MenuComponent } from './system/menu/menu.component';
+import { MenuItemComponent } from './system/menu/menu-item/menu-item.component';
 
 @NgModule({
-  declarations: [AppComponent, MenuComponent],
+  declarations: [AppComponent, MenuComponent, MenuItemComponent],
   entryComponents: [],
   imports: [
     BrowserModule,

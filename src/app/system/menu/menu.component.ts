@@ -46,8 +46,4 @@ export class MenuComponent implements OnInit {
         });
     });
   }
-
-  getText(item: Menu): string {
-    return Menu.getText(item);
-  }
 }
