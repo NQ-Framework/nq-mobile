@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, MenuController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DeviceManagementService } from '../system/device-management.service';
@@ -23,9 +23,10 @@ export class LoginPage implements OnInit {
     private formBuilder: FormBuilder,
     private loading: LoadingController,
     private device: DeviceManagementService,
+    private menu: MenuController,
   ) {}
   ngOnInit() {
-    this.user$ = this.auth.authState.pipe(map(u => (u ? u : 'none')));
+    this.user$ = this.auth.authState.pipe(map((u) => (u ? u : 'none')));
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: [
@@ -67,7 +68,7 @@ export class LoginPage implements OnInit {
           this.navigatingAway = false;
         });
       })
-      .catch(e => {
+      .catch((e) => {
         this.error = $localize`Error logging in. Please try again`;
         console.error(e);
       })

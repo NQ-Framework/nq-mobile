@@ -1,5 +1,8 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
     <ion-title>Login</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -11,7 +14,7 @@
     <div *ngIf="isValidUser(user); else signedOut">
       <p i18n>Logged in as: {{$any(user).displayName}}</p>
       <ion-button i18n (click)="signOut()">Log out</ion-button>
-      <a i18n routerLink="/field-service">Go to home page</a>
+      <a i18n routerLink="/home">Go to home page</a>
     </div>
     <ng-template #signedOut>
       <form [formGroup]="loginForm">

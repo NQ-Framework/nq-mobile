@@ -1,5 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
     <ion-title>
       Blank
     </ion-title>
@@ -21,6 +24,7 @@
         >UI Components</a
       >
     </p>
+    <a routerLink="/login">idi na login</a>
     <ion-button (click)="testApi()">Request some data</ion-button>
     <p>Status je: {{status$ | async}}</p>
     <p>Data je: {{stringify(data$ | async)}}</p>

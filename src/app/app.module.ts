@@ -15,9 +15,10 @@ import { InterceptorService } from './system/interceptor.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FCM } from 'capacitor-fcm';
 import { Plugins } from '@capacitor/core';
+import { MenuComponent } from './system/menu/menu.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, MenuComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
