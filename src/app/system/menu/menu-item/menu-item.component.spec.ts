@@ -5,7 +5,13 @@ import { MenuItemComponent } from './menu-item.component';
 import { Menu } from '../menu.model';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Location } from '@angular/common';
+import { Component } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
+@Component({
+  template: '',
+})
+class DummyComponent {}
 describe('MenuItemComponent', () => {
   let component: MenuItemComponent;
   let fixture: ComponentFixture<MenuItemComponent>;
@@ -19,7 +25,7 @@ describe('MenuItemComponent', () => {
       imports: [
         IonicModule.forRoot(),
         RouterTestingModule.withRoutes([
-          { path: 'something', component: MenuItemComponent },
+          { path: '**', component: DummyComponent },
         ]),
       ],
     }).compileComponents();
@@ -34,19 +40,17 @@ describe('MenuItemComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should hide menu after navigation', () => {
-    // TODO: test router was called
-    // const item = new Menu();
-    // item.url = '/something';
-    // component.menuItem = item;
+  it('should hide menu after navigation', async(async () => {
+    const item = new Menu();
+    component.menuItem = item;
     const menu: any = TestBed.inject(MenuController);
     component.hideMenu();
     expect(menu.close).toHaveBeenCalledTimes(1);
     menu.close.calls.reset();
-    const element = fixture.nativeElement as HTMLElement;
-    element.querySelector('ion-item').click();
+    const element = fixture.debugElement.query(By.css('ion-item'))
+      .nativeElement as HTMLElement;
+    element.click();
+    await fixture.whenStable();
     expect(menu.close).toHaveBeenCalledTimes(1);
-    // const location = TestBed.inject(Location);
-    // location.path(); // ?
-  });
+  }));
 });
