@@ -22,7 +22,7 @@ export class MenuComponent implements OnInit {
   }
 
   trackUserMenuOptions() {
-    this.auth.authState.subscribe(user => {
+    this.auth.authState.subscribe((user) => {
       console.log(user);
       if (!user) {
         loggedOutMenu.sort((a, b) => a.order - b.order);
@@ -37,7 +37,7 @@ export class MenuComponent implements OnInit {
       this.firestore
         .collection<Menu>('menu')
         .valueChanges()
-        .subscribe(menu => {
+        .subscribe((menu) => {
           if (menu && menu.length) {
             localStorage.setItem('menu_structure', JSON.stringify(menu));
             menu.sort((a, b) => a.order - b.order);

@@ -45,7 +45,7 @@ export class DeviceManagementService {
           resolve(false);
           return;
         }
-        this.unregisterUserAndDeviceInfo(user, info).then(b => {
+        this.unregisterUserAndDeviceInfo(user, info).then((b) => {
           resolve(b);
         });
       });
