@@ -3,22 +3,25 @@
     <ion-buttons slot="start">
       <ion-menu-button autoHide="false"></ion-menu-button>
     </ion-buttons>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title> Query </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large">Query</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <div id="container">
     <strong>Wanna get some data?</strong>
-    <ion-textarea></ion-textarea>
+    <ion-textarea
+      [(ngModel)]="query"
+      class="query-input"
+      placeholder="select * from table"
+    ></ion-textarea>
     <ion-button (click)="testApi()">Execute</ion-button>
+    <p>{{response | json}}</p>
   </div>
 </ion-content>

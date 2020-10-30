@@ -15,8 +15,8 @@ export const environment: IEnvironment = {
     appId: '1:384505471856:web:3c58fbc64af47987ae65b5',
     measurementId: 'G-Y8DD2TBN8J',
   },
-  apiUrl: 'http://localhost:3000/v1',
-  // apiUrl: 'https://server.nqframework.com/v1',
+  // apiUrl: 'http://localhost:3000/v1',
+  apiUrl: 'https://server.nqframework.com/v1',
   production: false,
 };
 

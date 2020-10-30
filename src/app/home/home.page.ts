@@ -1,6 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { BehaviorSubject, from } from 'rxjs';
-import { flatMap, filter, map, tap } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 interface Item {
   name: string;
@@ -14,8 +14,15 @@ interface Item {
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  constructor() { }
+  query: string;
+  response: any;
+  constructor(private httpClient: HttpClient) {}
 
   testApi() {
+    this.httpClient
+      .get(environment.apiUrl + '/work-order/sql?query=' + this.query)
+      .subscribe((res) => {
+        this.response = res;
+      });
   }
 }
