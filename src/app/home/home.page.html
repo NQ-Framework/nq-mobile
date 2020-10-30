@@ -17,20 +17,8 @@
   </ion-header>
 
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>
-      Start with Ionic
-      <a target="_blank" rel="noopener noreferrer" href="login"
-        >UI Components</a
-      >
-    </p>
-    <a routerLink="/login">idi na login</a>
-    <ion-button (click)="testApi()">Request some data</ion-button>
-    <p>Status je: {{status$ | async}}</p>
-    <p>Data je: {{stringify(data$ | async)}}</p>
-    <ion-spinner *ngIf="(status$ | async) == 'created document'"></ion-spinner>
-    <p *ngIf="(status$ | async) == 'created document'">
-      Idi u nq connector da mu daš response data :)
-    </p>
+    <strong>Wanna get some data?</strong>
+    <ion-textarea></ion-textarea>
+    <ion-button (click)="testApi()">Execute</ion-button>
   </div>
 </ion-content>
